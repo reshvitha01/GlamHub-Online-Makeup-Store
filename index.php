@@ -25,22 +25,20 @@ require_once 'includes/header.php';
                         </a>
                     <?php endif; ?>
                 </div>
-
-</section>
-
-
-<section class="page-band py-5">
-    <div class="container">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-7">
-                <p class="hero-kicker mb-2" style="color: var(--glam-rose);">Ready to glow</p>
-                <h2 class="section-title mb-2">Start with your skin tone and undertone</h2>
-                <p class="text-muted mb-0">The recommendation module helps customers narrow down suitable makeup products before purchasing.</p>
-            </div>
-            <div class="col-lg-5 text-lg-end">
-                <a href="shade_finder.php" class="btn btn-berry btn-lg">
-                    <i class="bi bi-magic me-2"></i>Open Smart Shade Finder
-                </a>
+                <div class="glass-strip d-flex flex-wrap gap-4 p-3">
+                    <div class="hero-stat">
+                        <strong>Smart</strong>
+                        <span>Shade matching</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>Beauty</strong>
+                        <span>Profile based</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>Easy</strong>
+                        <span>Online shopping</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -78,5 +76,21 @@ require_once 'includes/header.php';
     </div>
 </section>
 
+<section class="page-band py-5">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <p class="hero-kicker mb-2" style="color: var(--glam-rose);">Ready to glow</p>
+                <h2 class="section-title mb-2">Start with your skin tone and undertone</h2>
+                <p class="text-muted mb-0">The recommendation module helps customers narrow down suitable makeup products before purchasing.</p>
+            </div>
+            <div class="col-lg-5 text-lg-end">
+                <a href="shade_finder.php" class="btn btn-berry btn-lg">
+                    <i class="bi bi-magic me-2"></i>Open Smart Shade Finder
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php require_once 'includes/footer.php'; ?>
