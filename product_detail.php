@@ -47,9 +47,7 @@ require_once 'includes/header.php';
                 </div>
 
                 <?php if (isLoggedIn()): ?>
-                    <button class="btn btn-berry btn-lg" disabled>
-                        <i class="bi bi-bag-plus me-2"></i>Add to Cart
-                    </button>
+                    <form method="post" action="add_to_cart.php" class="d-flex flex-wrap gap-3 align-items-end"><input type="hidden" name="product_id" value="<?php echo $product['id']; ?>"><div><label class="form-label fw-semibold">Quantity</label><input type="number" name="quantity" class="form-control" value="1" min="1" style="width: 110px;"></div><button type="submit" class="btn btn-berry btn-lg"><i class="bi bi-bag-plus me-2"></i>Add to Cart</button></form>
                 <?php else: ?>
                     <div class="alert alert-info">
                         Please <a href="login.php">login</a> to access purchase features.

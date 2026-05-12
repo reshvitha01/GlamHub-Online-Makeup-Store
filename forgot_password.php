@@ -25,14 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$errors) {
-        $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? AND role = 'customer'");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if (!$user) {
-            $errors[] = 'No account found with this email address.';
+            $errors[] = 'No customer account found with this email address.';
         } else {
-            $update = $pdo->prepare('UPDATE users SET password = ? WHERE email = ?');
+            $update = $pdo->prepare("UPDATE users SET password = ? WHERE email = ? AND role = 'customer'");
             $update->execute([password_hash($newPassword, PASSWORD_DEFAULT), $email]);
             $success = 'Password reset successful. You can login with your new password.';
             $email = '';
@@ -48,7 +48,7 @@ require_once 'includes/header.php';
         <div class="col-lg-5">
             <div class="soft-panel p-4 p-md-5">
                 <h1 class="section-title h2 mb-2">Reset Password</h1>
-                <p class="text-muted mb-4">Enter your registered email and create a new password.</p>
+                <p class="text-muted mb-4">Customers can reset password using their registered email. Staff and admin must contact the admin for password reset.</p>
 
                 <?php if ($errors): ?>
                     <div class="alert alert-danger">

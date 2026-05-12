@@ -42,7 +42,7 @@ require_once 'includes/header.php';
         <div>
             <p class="hero-kicker text-uppercase mb-2" style="color: var(--glam-rose);">GlamHub Collection</p>
             <h1 class="section-title mb-2">Browse Makeup Products</h1>
-            <p class="text-muted mb-0">Guests can browse products. Login will be required for future purchase features.</p>
+            <p class="text-muted mb-0">Explore cosmetics by category, skin tone, and undertone with a clean beauty shopping layout.</p>
         </div>
         <?php if (!isLoggedIn()): ?>
             <div class="align-self-lg-end">
@@ -53,7 +53,7 @@ require_once 'includes/header.php';
         <?php endif; ?>
     </div>
 
-    <form class="soft-panel p-3 p-md-4 mb-4" method="get">
+    <form class="soft-panel filter-panel p-3 p-md-4 mb-4" method="get">
         <div class="row g-3 align-items-end">
             <div class="col-md-3">
                 <label class="form-label fw-semibold">Category</label>
@@ -115,9 +115,7 @@ require_once 'includes/header.php';
                         </div>
                         <h2 class="h5 fw-bold mb-2"><?php echo htmlspecialchars($product['name']); ?></h2>
                         <p class="text-muted mb-3">
-                            <?php echo htmlspecialchars($product['shade']); ?> ·
-                            <?php echo htmlspecialchars($product['skin_tone']); ?> ·
-                            <?php echo htmlspecialchars($product['undertone']); ?>
+                            <?php echo htmlspecialchars($product['shade']); ?> &middot; <?php echo htmlspecialchars($product['skin_tone']); ?> &middot; <?php echo htmlspecialchars($product['undertone']); ?>
                         </p>
                         <a href="product_detail.php?id=<?php echo $product['id']; ?>" class="btn btn-outline-berry w-100">
                             View Details
@@ -130,3 +128,4 @@ require_once 'includes/header.php';
 </section>
 
 <?php require_once 'includes/footer.php'; ?>
+
