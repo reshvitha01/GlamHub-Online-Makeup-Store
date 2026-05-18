@@ -32,7 +32,7 @@ require_once 'includes/header.php';
         </div>
         <div class="d-flex flex-wrap gap-2 align-self-lg-end">
             <a href="admin_products.php" class="btn btn-berry"><i class="bi bi-box-seam me-2"></i>Manage Products</a>
-            <a href="staff.php" class="btn btn-outline-berry"><i class="bi bi-clipboard-check me-2"></i>Staff Orders</a>
+            <a href="admin_orders.php" class="btn btn-outline-berry"><i class="bi bi-receipt me-2"></i>All Orders</a><a href="staff.php" class="btn btn-outline-berry"><i class="bi bi-clipboard-check me-2"></i>Staff Orders</a>
             <a href="manage_accounts.php" class="btn btn-outline-berry"><i class="bi bi-person-gear me-2"></i>Manage Accounts</a>
         </div>
     </div>
@@ -137,5 +137,6 @@ require_once 'includes/header.php';
 </section>
 
 <?php require_once 'includes/footer.php'; ?>
+
 
 

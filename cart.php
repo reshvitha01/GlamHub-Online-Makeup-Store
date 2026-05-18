@@ -26,7 +26,7 @@ require_once 'includes/header.php';
 <section class="container py-5">
     <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
         <div>
-            <p class="hero-kicker text-uppercase mb-2" style="color: var(--glam-rose);">Shopping Cart</p>
+            <p class="hero-kicker mb-2" style="color: var(--glam-rose);">Shopping Cart</p>
             <h1 class="section-title mb-0">Your Selected Products</h1>
         </div>
         <a href="products.php" class="btn btn-outline-berry align-self-md-end">Continue Shopping</a>
@@ -34,6 +34,12 @@ require_once 'includes/header.php';
 
     <?php if (isset($_GET['added'])): ?>
         <div class="alert alert-success">Product added to cart.</div>
+    <?php endif; ?>
+    <?php if (isset($_GET['updated'])): ?>
+        <div class="alert alert-success">Cart quantity updated.</div>
+    <?php endif; ?>
+    <?php if (isset($_GET['removed'])): ?>
+        <div class="alert alert-success">Item removed from cart.</div>
     <?php endif; ?>
 
     <?php if (!$items): ?>
@@ -52,12 +58,19 @@ require_once 'includes/header.php';
                             <div class="col-4 col-md-3">
                                 <img src="<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['name']); ?>" class="img-fluid rounded-3">
                             </div>
-                            <div class="col-8 col-md-6">
+                            <div class="col-8 col-md-4">
                                 <h2 class="h5 fw-bold mb-1"><?php echo htmlspecialchars($item['name']); ?></h2>
                                 <p class="text-muted mb-1"><?php echo htmlspecialchars($item['shade']); ?></p>
-                                <p class="price mb-0">RM <?php echo number_format($item['price'], 2); ?> x <?php echo $item['quantity']; ?></p>
+                                <p class="price mb-0">RM <?php echo number_format($item['price'], 2); ?></p>
                             </div>
-                            <div class="col-md-3 text-md-end">
+                            <div class="col-md-3">
+                                <form method="post" action="update_cart.php" class="d-flex gap-2">
+                                    <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
+                                    <input type="number" name="quantity" class="form-control form-control-sm" value="<?php echo $item['quantity']; ?>" min="1">
+                                    <button type="submit" class="btn btn-sm btn-outline-berry">Update</button>
+                                </form>
+                            </div>
+                            <div class="col-md-2 text-md-end">
                                 <p class="fw-bold mb-2">RM <?php echo number_format($item['price'] * $item['quantity'], 2); ?></p>
                                 <a href="remove_cart_item.php?id=<?php echo $item['cart_id']; ?>" class="btn btn-sm btn-outline-danger">Remove</a>
                             </div>

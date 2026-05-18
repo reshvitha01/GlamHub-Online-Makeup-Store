@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/db.php';
+require_once 'includes/auth.php';
 
 $pageTitle = 'Smart Shade Finder';
 $skinTone = $_GET['skin_tone'] ?? '';
@@ -34,6 +35,15 @@ if ($skinTone !== '' || $undertone !== '' || $category !== '') {
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
     $recommendations = $stmt->fetchAll();
+
+    if (isLoggedIn() && $skinTone !== '' && $undertone !== '') {
+        try {
+            $history = $pdo->prepare('INSERT INTO recommendation_history (user_id, skin_tone, undertone, category_id, result_count) VALUES (?, ?, ?, ?, ?)');
+            $history->execute([$_SESSION['user_id'], $skinTone, $undertone, $category !== '' ? $category : null, count($recommendations)]);
+        } catch (PDOException $e) {
+            // History table may not be imported yet; recommendation results should still work.
+        }
+    }
 }
 
 require_once 'includes/header.php';
@@ -88,7 +98,7 @@ require_once 'includes/header.php';
         <div class="col-lg-7">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h2 class="section-title h3 mb-0">Recommended Products</h2>
-                <a href="shade_finder.php" class="small text-decoration-none">Reset</a>
+                <div class="d-flex gap-3"><a href="recommendation_history.php" class="small text-decoration-none">History</a><a href="shade_finder.php" class="small text-decoration-none">Reset</a></div>
             </div>
 
             <?php if ($skinTone === '' && $undertone === '' && $category === ''): ?>
@@ -121,4 +131,6 @@ require_once 'includes/header.php';
 </section>
 
 <?php require_once 'includes/footer.php'; ?>
+
+
 

@@ -91,6 +91,10 @@ require_once 'includes/header.php';
         <div class="alert alert-success">Product deleted successfully.</div>
     <?php endif; ?>
 
+    <?php if (isset($_GET['updated'])): ?>
+        <div class="alert alert-success">Product updated successfully.</div>
+    <?php endif; ?>
+
     <div class="row g-4">
         <div class="col-lg-5">
             <form class="soft-panel p-4" method="post">
@@ -171,7 +175,10 @@ require_once 'includes/header.php';
                                     <td><?php echo htmlspecialchars($product['category_name']); ?></td>
                                     <td>RM <?php echo number_format($product['price'], 2); ?></td>
                                     <td class="text-end">
-                                        <a href="admin_products.php?delete=<?php echo $product['id']; ?>" class="btn btn-sm btn-outline-danger" data-confirm="Delete this product?">Delete</a>
+                                        <div class="d-flex justify-content-end gap-2">
+                                            <a href="edit_product.php?id=<?php echo $product['id']; ?>" class="btn btn-sm btn-outline-berry">Edit</a>
+                                            <a href="admin_products.php?delete=<?php echo $product['id']; ?>" class="btn btn-sm btn-outline-danger" data-confirm="Delete this product?">Delete</a>
+                                        </div>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -184,4 +191,5 @@ require_once 'includes/header.php';
 </section>
 
 <?php require_once 'includes/footer.php'; ?>
+
 
