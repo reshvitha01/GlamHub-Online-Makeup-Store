@@ -160,7 +160,7 @@ require_once 'includes/header.php';
                     <input type="text" name="department" class="form-control" placeholder="Sales, Customer Support, Inventory">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">Temporary Password</label>
+                    <label class="form-label fw-semibold">Password</label>
                     <input type="password" name="password" class="form-control" required>
                 </div>
                 <div class="mb-4">
