@@ -33,6 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($deliveryPhone === '') {
         $errors[] = 'Phone number is required.';
+    } elseif (!preg_match('/^[0-9]{10,12}$/', $deliveryPhone)) {
+        $errors[] = 'Invalid phone number. Please enter numbers only, 10 to 12 digits.';
     }
     if ($deliveryAddress === '') {
         $errors[] = 'Delivery address is required.';
@@ -84,7 +86,7 @@ require_once 'includes/header.php';
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Phone Number</label>
-                        <input type="text" name="delivery_phone" class="form-control" required>
+                        <input type="tel" name="delivery_phone" class="form-control" inputmode="numeric" pattern="[0-9]{10,12}" maxlength="12" title="Enter numbers only, 10 to 12 digits" data-phone-field required><div class="text-danger small phone-error-message mt-1"></div>
                     </div>
                     <div class="mb-4">
                         <label class="form-label fw-semibold">Delivery Address</label>
@@ -113,4 +115,34 @@ require_once 'includes/header.php';
     <?php endif; ?>
 </section>
 
+
+<script>
+function validatePhoneInput(input) {
+    const message = input.parentElement.querySelector('.phone-error-message');
+    const isValid = /^[0-9]{10,12}$/.test(input.value.trim());
+
+    if (input.value.trim() === '') {
+        input.setCustomValidity('Phone number is required.');
+        if (message) message.textContent = '';
+        return;
+    }
+
+    if (!isValid) {
+        input.setCustomValidity('Invalid phone number. Please enter numbers only, 10 to 12 digits.');
+        if (message) message.textContent = 'Invalid phone number. Please enter numbers only, 10 to 12 digits.';
+    } else {
+        input.setCustomValidity('');
+        if (message) message.textContent = '';
+    }
+}
+
+document.querySelectorAll('input[data-phone-field]').forEach((input) => {
+    input.addEventListener('input', () => validatePhoneInput(input));
+    input.addEventListener('blur', () => validatePhoneInput(input));
+});
+</script>
 <?php require_once 'includes/footer.php'; ?>
+
+
+
+
