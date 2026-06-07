@@ -24,9 +24,17 @@ require_once 'includes/header.php';
         <a href="products.php" class="btn btn-outline-berry align-self-md-end">Shop More</a>
     </div>
 
-    <?php if (isset($_GET['placed'])): ?>
-        <div class="alert alert-success">Your order has been placed successfully.</div>
+<?php if (isset($_GET['placed'])): ?>
+    <?php if (($_GET['method'] ?? '') === 'bank_transfer'): ?>
+        <div class="alert alert-warning">
+            <strong>Order placed!</strong> Please allow 1â€“2 business days for us to verify your payment receipt before we process your order.
+        </div>
+    <?php else: ?>
+        <div class="alert alert-success">
+            <strong>Order placed!</strong> Please prepare your payment when your order arrives.
+        </div>
     <?php endif; ?>
+<?php endif; ?>
 
     <?php if (!$orders): ?>
         <div class="soft-panel p-5 text-center">
@@ -55,7 +63,7 @@ require_once 'includes/header.php';
 
                 <?php foreach ($items as $item): ?>
                     <div class="d-flex justify-content-between py-2">
-                        <span><?php echo htmlspecialchars($item['product_name']); ?> · <?php echo htmlspecialchars($item['shade']); ?> x <?php echo $item['quantity']; ?></span>
+                        <span><?php echo htmlspecialchars($item['product_name']); ?> ï¿½ <?php echo htmlspecialchars($item['shade']); ?> x <?php echo $item['quantity']; ?></span>
                         <strong>RM <?php echo number_format($item['price'] * $item['quantity'], 2); ?></strong>
                     </div>
                 <?php endforeach; ?>
